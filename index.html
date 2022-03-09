@@ -5,6 +5,69 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Practica JS - Profesores o Estudiantes</title>
+		<!--  cdn bootstrap -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 	</head>
-	<body></body>
+	<body>
+		<!--================ start form area ================-->
+		<div class="container p-2 my-2">
+			<h1 class="text-center">Estudiantes o Profesores</h1>
+			<form class="d-flex flex-column mt-2">
+				<div class="alert alert-danger w-50 text-center mx-auto d-none">Complete Correctamente los Datos</div>
+				<input class="my-1 w-50 mx-auto" type="text" placeholder="Nombre" value="Tomas" />
+				<input class="my-1 w-50 mx-auto" type="text" placeholder="Apellido" value="Aranda" />
+				<input class="my-1 w-50 mx-auto" type="number" placeholder="Edad" value="25" />
+				<select class="my-1 p-1 w-50 mx-auto" name="opcion" id="opcion">
+					<option value="Estudiante">Estudiante</option>
+					<option value="Profesor">Profesor</option>
+				</select>
+				<input class="my-1 btn btn-primary rounded w-25 mx-auto" type="submit" />
+			</form>
+		</div>
+		<!--================ end form area  ================-->
+
+		<!--================ start pintar area  ================-->
+		<div class="container">
+			<div class="row d-flex justify-content-between p-2">
+				<div class="d-flex flex-column col-12 col-md-6" id="pintarEstudiantes"></div>
+				<div class="d-flex-flex-column col-12 col-md-6" id="pintarProfesores"></div>
+			</div>
+		</div>
+		<!--================ end pintar area  ================-->
+
+		<!--================ start template estudiante area  ================-->
+		<template id="templateEstudiante">
+			<div class="card my-2 mx-auto" style="width: 18rem">
+				<div class="card-body">
+					<div class="d-flex justify-content-between align-items-center">
+						<h5 class="card-title"><span>Sr/a</span> Tomas</h5>
+						<span class="badge bg-success">Aprobado</span>
+					</div>
+					<p class="card-text">Estudiante <span>Tomas</span> <span>Aranda</span>, su uid unico: <span>424824111452154</span></p>
+					<div class="d-flex justify-content-around">
+						<a href="#" class="btn btn-success">Aprobar</a>
+						<a href="#" class="btn btn-danger">Desaprobar</a>
+					</div>
+				</div>
+			</div>
+		</template>
+		<!--================ end template estudiante area  ================-->
+
+		<!--================ start template profesor area  ================-->
+		<template id="templateProfesor">
+			<div class="card my-2 bg-dark mx-auto" style="width: 18rem">
+				<div class="card-body">
+					<div class="d-flex justify-content-between align-items-center">
+						<h5 class="card-title text-light"><span>Sr/a</span> Tomas</h5>
+					</div>
+					<cite class="text-warning">Profesor</cite>
+					<p class="card-text text-light"><span>Tomas</span> <span>Aranda</span>, su uid unico: <span>424824111452154</span></p>
+				</div>
+			</div>
+		</template>
+		<!--================ end template profesor area  ================-->
+
+		<!-- script bootstrap -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	</body>
 </html>
