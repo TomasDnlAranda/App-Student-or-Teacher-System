@@ -7,6 +7,7 @@ const fragment = document.createDocumentFragment();
 const alert = document.getElementById('alert');
 
 const estudiantes = [];
+const profesores = [];
 
 formulario.addEventListener('submit', (e) => {
 	alert.classList.add('d-none');
@@ -23,6 +24,10 @@ formulario.addEventListener('submit', (e) => {
 		const estudiante = new Estudiante(nombre, apellido, edad);
 		estudiantes.push(estudiante);
 		Persona.obtenerPersona(opcion, estudiantes);
+	} else if (opcion === 'Profesor') {
+		const profesor = new Profesor(nombre, apellido, edad);
+		profesores.push(profesor);
+		Persona.obtenerPersona(opcion, profesores);
 	}
 });
 
@@ -34,13 +39,20 @@ class Persona {
 		this.uid = `${Date.now()}`;
 	}
 	static obtenerPersona(tipo, personas) {
-		pintarEstudiantes.textContent = '';
-
 		if (tipo === 'Estudiante') {
+			pintarEstudiantes.textContent = '';
+
 			personas.forEach((item) => {
 				fragment.appendChild(item.pintarEstudiantes());
 			});
 			pintarEstudiantes.appendChild(fragment);
+		} else if (tipo === 'Profesor') {
+			pintarProfesores.textContent = '';
+
+			personas.forEach((item) => {
+				fragment.appendChild(item.pintarProfesores());
+			});
+			pintarProfesores.appendChild(fragment);
 		}
 	}
 }
@@ -61,4 +73,14 @@ class Estudiante extends Persona {
 
 class Profesor extends Persona {
 	#profesor = 'Profesor';
+	pintarProfesores() {
+		const cloneProfesor = templateProfesor.cloneNode(true);
+		cloneProfesor.querySelector('h5 span').textContent = this.nombre;
+		cloneProfesor.querySelector('cite').textContent = this.#profesor;
+		cloneProfesor.querySelector('.templateProfesorSpan1').textContent = this.nombre;
+		cloneProfesor.querySelector('.templateProfesorSpan2').textContent = this.apellido;
+		cloneProfesor.querySelector('.templateProfesorUid').textContent = this.uid;
+		cloneProfesor.querySelector('.templateProfesorEdad').textContent = this.edad;
+		return cloneProfesor;
+	}
 }
