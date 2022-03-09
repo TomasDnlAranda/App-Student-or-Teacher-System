@@ -33,12 +33,12 @@ document.addEventListener('click', (e) => {
 formulario.addEventListener('submit', (e) => {
 	alert.classList.add('d-none');
 
-	e.preventDefault();
 	const valoresDelFormulario = new FormData(formulario);
 	const [nombre, apellido, edad, opcion] = [...valoresDelFormulario.values()];
 
 	if (!nombre.trim() || !apellido.trim() || !edad.trim() || !opcion.trim()) {
 		alert.classList.remove('d-none');
+		return;
 	}
 
 	if (opcion === 'Estudiante') {
