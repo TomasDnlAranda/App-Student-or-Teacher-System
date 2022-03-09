@@ -9,6 +9,27 @@ const alert = document.getElementById('alert');
 const estudiantes = [];
 const profesores = [];
 
+document.addEventListener('click', (e) => {
+	if (e.target.dataset.id) {
+		if (e.target.matches('.btn-success')) {
+			estudiantes.map((item) => {
+				if (item.uid === e.target.dataset.id) {
+					item.setEstado = true;
+					return item;
+				}
+			});
+		} else if (e.target.matches('.btn-danger')) {
+			estudiantes.map((item) => {
+				if (item.uid === e.target.dataset.id) {
+					item.setEstado = false;
+					return item;
+				}
+			});
+		}
+		Persona.obtenerPersona('Estudiante', estudiantes);
+	}
+});
+
 formulario.addEventListener('submit', (e) => {
 	alert.classList.add('d-none');
 
@@ -60,6 +81,11 @@ class Persona {
 class Estudiante extends Persona {
 	#estudiante = 'Estudiante';
 	#estado = false;
+
+	set setEstado(estado) {
+		this.#estado = estado;
+	}
+
 	pintarEstudiantes() {
 		const cloneEstudiante = templateEstudiante.cloneNode(true);
 		cloneEstudiante.querySelector('h5 span').textContent = this.nombre;
@@ -67,6 +93,24 @@ class Estudiante extends Persona {
 		cloneEstudiante.querySelector('.templateSpanP2').textContent = this.apellido;
 		cloneEstudiante.querySelector('.templateEdad').textContent = this.edad;
 		cloneEstudiante.querySelector('.templateUid').textContent = this.uid;
+
+		if (this.#estado) {
+			cloneEstudiante.querySelector('.btn-success').classList.add('disabled');
+			cloneEstudiante.querySelector('.btn-danger').classList.remove('disabled');
+			cloneEstudiante.querySelector('.badge').classList.remove('bg-danger');
+			cloneEstudiante.querySelector('.badge').classList.add('bg-success');
+		} else {
+			cloneEstudiante.querySelector('.btn-danger').classList.add('disabled');
+			cloneEstudiante.querySelector('.btn-success').classList.remove('disabled');
+			cloneEstudiante.querySelector('.badge').classList.remove('bg-success');
+			cloneEstudiante.querySelector('.badge').classList.add('bg-danger');
+		}
+
+		cloneEstudiante.querySelector('.btn-danger').dataset.id = this.uid;
+		cloneEstudiante.querySelector('.btn-success').dataset.id = this.uid;
+
+		cloneEstudiante.querySelector('.badge').textContent = this.#estado ? 'aprobado' : 'reprobado';
+
 		return cloneEstudiante;
 	}
 }
