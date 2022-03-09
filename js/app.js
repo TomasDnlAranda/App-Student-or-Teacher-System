@@ -31,6 +31,7 @@ document.addEventListener('click', (e) => {
 });
 
 formulario.addEventListener('submit', (e) => {
+	e.preventDefault();
 	alert.classList.add('d-none');
 
 	const valoresDelFormulario = new FormData(formulario);
